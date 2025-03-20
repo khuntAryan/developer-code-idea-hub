@@ -1,21 +1,9 @@
-import { signOut } from "../auth";
-
-import React from "react";
+import React from 'react'
 
 const SignOut = () => {
   return (
-    <>
-      <form
-        action={async () => {
-          "use server";
+    <div>SignOut</div>
+  )
+}
 
-          await signOut({ redirectTo: "/" });
-        }}
-      >
-        <button type="submit">Sign Out</button>
-      </form>
-    </>
-  );
-};
-
-export default SignOut;
+export default SignOut

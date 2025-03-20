@@ -1,9 +1,16 @@
 // page.tsx (Home Page)
 import Link from "next/link";
-import { auth } from "../../auth";
+import { getLoggedInUser } from "../lib/server/appwrite";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const session = await auth();
+  // src/app/page.jsx
+
+  const user = await getLoggedInUser();
+
+  if (!user) redirect("/signup");
+
+  // redirect("/");
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
@@ -24,25 +31,17 @@ export default async function Home() {
             </button>
           </Link>
 
-          {session?.user ? (
-            <Link href="/workspace">
-              <button className="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-200">
-                Open Workspace
-              </button>
-            </Link>
-          ) : (
-            <></>
-          )}
+          <Link href="/workspace">
+            <button className="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-200">
+              Open Workspace
+            </button>
+          </Link>
 
-          {session?.user ? (
-            <Link href="/submit">
-              <button className="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-200">
-                Submit Snippet
-              </button>
-            </Link>
-          ) : (
-            <></>
-          )}
+          <Link href="/submit">
+            <button className="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-200">
+              Submit Snippet
+            </button>
+          </Link>
         </div>
       </div>
     </main>

@@ -1,11 +1,28 @@
 import React from "react";
-import SignIn from "./SignIn";
-import { auth } from "../auth";
+
 import Image from "next/image";
-import SignOut from "./SignOut";
+import {
+  createSessionClient,
+  getLoggedInUser,
+} from "../app/lib/server/appwrite";
+
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { signUpWithGithub } from "../app/lib/server/oauth";
+
+async function signOut() {
+  "use server";
+  const { account } = await createSessionClient();
+
+  (await cookies()).delete("my-custom-session");
+  await account.deleteSession("current");
+
+  redirect("/");
+}
 
 const Navbar = async () => {
-  const session = await auth();
+  const user = await getLoggedInUser();
+
   return (
     <header className="min-w-full h-full bg-cyan-900 text-white p-5 justify-between flex flex-row items-center px-10">
       <div>
@@ -16,17 +33,19 @@ const Navbar = async () => {
           width={48}
         />
       </div>
-      <div className="p-2 text-2x border-2 bg-gray-50 text-black rounded-2xl">
-        {session?.user ? (
-          <div>
-            <SignOut />
-          </div>
-        ) : (
-          <>
-            <SignIn />
-          </>
-        )}
-      </div>
+      {(user) ? (
+        <div className="p-2 text-2x border-2 bg-gray-50 text-black rounded-2xl">
+          <form action={signOut}>
+            <button type="submit">Sign out</button>
+          </form>
+        </div>
+      ) : (
+        <>
+          <form action={signUpWithGithub}>
+            <button type="submit">Sign up with GitHub</button>
+          </form>
+        </>
+      )}
     </header>
   );
 };
