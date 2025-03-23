@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 // import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
-export async function GET(request) {
+export async function GET(request:any) {
   const userId = request.nextUrl.searchParams.get("userId");
   const secret = request.nextUrl.searchParams.get("secret");
 

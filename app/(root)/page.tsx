@@ -4,13 +4,13 @@ import { getLoggedInUser } from "../lib/server/appwrite";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
-  // src/app/page.jsx
+
 
   const user = await getLoggedInUser();
 
   if (!user) redirect("/signup");
 
-  // redirect("/");
+
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
@@ -23,7 +23,7 @@ export default async function Home() {
           contribute code snippets while visually demonstrating their ideas.
         </p>
 
-        {/* Navigation Buttons */}
+
         <div className="flex flex-wrap justify-center gap-4">
           <Link href="/snippets">
             <button className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200">
