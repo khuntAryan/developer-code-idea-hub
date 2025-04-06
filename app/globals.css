@@ -24,3 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.signInButton {
+  padding: 0.3rem; /* Tailwind's p-2 */
+  font-size: 1.2rem;
+  border-width: 2px;
+  background-color: #f9fafb; /* Tailwind's bg-gray-50 */
+  color: #000000; /* Tailwind's text-black */
+  border-radius: 1rem; /* Tailwind's rounded-2xl */
+}

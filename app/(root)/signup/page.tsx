@@ -16,7 +16,7 @@ export default function SignUpPage() {
     const formData = new FormData(event.currentTarget);
 
     const response = await signUpWithEmail(formData);
-
+ 
     if (response.error) {
       setError(response.error);
     } else {
@@ -39,7 +39,7 @@ export default function SignUpPage() {
           </div>
         )}
 
-        <form onSubmit={handleSignUp} className="space-y-4">
+        <form onSubmit={handleSignUp} className="space-y-4 text-black">
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Name

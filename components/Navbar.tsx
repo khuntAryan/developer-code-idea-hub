@@ -33,16 +33,18 @@ const Navbar = async () => {
           width={48}
         />
       </div>
-      {(user) ? (
-        <div className="p-2 text-2x border-2 bg-gray-50 text-black rounded-2xl">
+      {user ? (
+        <div className="signInButton">
           <form action={signOut}>
             <button type="submit">Sign out</button>
           </form>
         </div>
       ) : (
         <>
-          <form action={signUpWithGithub}>
-            <button type="submit">Sign up with GitHub</button>
+          <form className="signInButton" action={signUpWithGithub}>
+            <button disabled={true} type="submit">
+              Sign up with GitHub
+            </button>
           </form>
         </>
       )}

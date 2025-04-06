@@ -33,8 +33,10 @@ export async function signUpWithEmail(formData: FormData) {
     });
 
     return { success: true };
-  } catch (error: any) {
-    if (error.message.includes("already exists")) {
+  } catch (error: unknown
+    
+  ) {
+    if (error instanceof Error && error.message.includes("already exists")) {
       return {
         error: "An account with this email already exists. Please log in.",
       };
@@ -66,8 +68,8 @@ export async function loginWithEmail(formData: FormData) {
     });
 
     return { success: true };
-  } catch (error: any) {
-    if (error.message.includes("Invalid")) {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message.includes("Invalid")) {
       return { error: "Invalid email or password. Please try again." };
     }
     return { error: "An error occurred. Please try again later." };

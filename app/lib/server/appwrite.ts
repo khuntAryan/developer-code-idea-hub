@@ -1,6 +1,6 @@
 // src/lib/server/appwrite.js
 "use server";
-import { Client, Account } from "node-appwrite";
+import { Client, Account ,Databases} from "node-appwrite";
 import { cookies } from "next/headers";
 import {
   appwriteApiKey,
@@ -38,6 +38,9 @@ export async function createAdminClient() {
     get account() {
       return new Account(client);
     },
+    get databases() {
+      return new Databases(client);
+    }
   };
 }
 
@@ -47,7 +50,10 @@ export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
     return await account.get();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return null;
   }
 }
+export { Client };
+

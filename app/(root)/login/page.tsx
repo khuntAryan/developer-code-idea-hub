@@ -39,7 +39,7 @@ export default function LoginPage() {
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4 text-black">
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email
